@@ -4,6 +4,7 @@ package org.lemonparty.units
 	import org.lemonparty.projectiles.luxShot;
 	import org.lemonparty.Unit;
 	import org.flixel.*;
+	import org.lemonparty.*;
 	/**
 	 * ...
 	 * @author K4Orta (Erik Wong)
@@ -18,6 +19,23 @@ package org.lemonparty.units
 			_jumpPower = 220;
 			drag.x = _maxRunSpeed * 10;
 			_maxRunSpeed = 160;
+		}
+		
+		// move this code into the unit class and add hooks.
+		override public function preUpdate():void {
+			var gt:uint = _map.getTile(int(x / 96), int(y / 96));
+			if (gt == 1||gt==2) {
+				acceleration.y = K4G.gravity / 4;
+				_maxRunSpeed = 300;
+				_jumpPower = 420;
+				_inField = true;
+			}else{
+				acceleration.y = K4G.gravity;
+				_maxRunSpeed = 160;
+				_inField = false;
+				_jumpPower = 220;
+			}
+			super.preUpdate();
 		}
 		
 		override public function update():void {
@@ -48,7 +66,7 @@ package org.lemonparty.units
 			}
 			
 			//Jumping
-			if (FlxG.keys.justPressed("SPACE")&&isTouching(DOWN)) {
+			if (FlxG.keys.justPressed("SPACE")&&(isTouching(DOWN)||_inField)) {
 				velocity.y -= _jumpPower;
 			}
 		}

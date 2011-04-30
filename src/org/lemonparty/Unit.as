@@ -15,6 +15,7 @@ package org.lemonparty
 	public class Unit extends GameObject implements IEventDispatcher{
 		protected var _maxRunSpeed:Number;
 		protected var _jumpPower:Number;
+		protected var _inField:Boolean;
 		public var attTar:BasicObject;
 		public var susOb:BasicObject;
 		public var cortex:FlxObject;
@@ -38,6 +39,11 @@ package org.lemonparty
 		
 		override public function update():void {
 			super.update();
+		}
+		
+		override public function hurt(Damage:Number):void {
+			flicker(1);
+			super.hurt(Damage);
 		}
 		
 		public function grabItem(Ob1:FlxObject, Ob2:FlxObject):GameObject{

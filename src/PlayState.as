@@ -22,6 +22,7 @@ package{
 		public var camFollow:FlxObject = new FlxObject();
 		
 		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgTileset:Class;
+		[Embed(source = "org/lemonparty/data/mark.png")] private var ImgMark:Class;
 		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
 		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void{
@@ -41,11 +42,13 @@ package{
 			add(mapLoader.layerMain);
 			
 			add(miscObjects);
+			add(enemies)
 			add(player);
 			add(marks);
 			add(bullets);
 			player.add(curSel);
 			collideMap.add(player);
+			collideMap.add(enemies);
 			FlxG.camera.setBounds(0, 0, map.width, map.height,true);
 			FlxG.camera.follow(camFollow);
 		}
@@ -57,8 +60,19 @@ package{
 			camFollow.x = curSel.x+(FlxG.mouse.screenX-240)+8;
 			camFollow.y = curSel.y+(FlxG.mouse.screenY-120)+16;
 			FlxG.collide(collideMap, map);
-			
+			FlxG.overlap(bullets, enemies, bulletHitEnemy);
 			collideBullets();
+		}
+		
+		public function bulletHitEnemy(Ob1:FlxObject, Ob2:FlxObject):void {
+			var proj:Projectile = Ob1 as Projectile;
+			var en:BasicObject = Ob2 as BasicObject;
+			var hitLoc:FlxPoint;
+			hitLoc = en.ray(proj.tail, proj.head, proj.normal);
+			if (hitLoc) {
+				proj.hits.push(en);
+				proj.hitLocs.push(hitLoc);
+			}
 		}
 		
 		public function collideBullets():void {
@@ -91,15 +105,20 @@ package{
 					}
 					if (lowI > -1) {
 						if (a.hits[lowI] is FlxTilemap) {
-							trace("hit map");
+							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 							a.kill();
 						}else if(a.hits[lowI] is GameObject){
 							a.kill();
-							trace("hit GameObject");
+							a.hits[lowI].hurt(1);
+							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 						}
 					}
 				}
 			}
+		}
+		
+		public function mark(X:Number, Y:Number):void {
+			marks.add(new FlxSprite(X,Y,ImgMark));
 		}
 		
 	}

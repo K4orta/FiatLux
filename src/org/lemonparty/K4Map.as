@@ -61,6 +61,7 @@ package org.lemonparty {
 		
 		public function blank():void {
 			Hero;
+			Shadow;
 		}
 		
 		public function loadSprites(Data:String):void {
