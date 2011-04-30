@@ -25,10 +25,10 @@ package org.lemonparty.units
 		
 		// move this code into the unit class and add hooks.
 		override public function preUpdate():void {
-			var gt:uint = _map.getTile(int(x / 96), int(y / 96));
-			if (gt == 1||gt==2) {
+			var gt:uint = _logic.pipeMap.getTile(int(x / 96), int(y / 96));
+			if (gt == 2||gt==3) {
 				acceleration.y = K4G.gravity / 4;
-				_maxRunSpeed = 300;
+				_maxRunSpeed = 400;
 				_jumpPower = 420;
 				_inField = true;
 			}else{

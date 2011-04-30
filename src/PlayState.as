@@ -20,15 +20,17 @@ package{
 		public var gui:K4GUI;
 		public var mapLoader:K4Map;
 		public var map:ColorTilemap;
-		public var pipeMap:FlxTilemap; 
+		public var pipeMap:ColorTilemap; 
 		public var curSel:Unit;
 		public var camFollow:FlxObject = new FlxObject();
 		
 		public var pipeLookup:Array = new Array();
 		
-		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgTileset:Class;
+		[Embed(source = "org/lemonparty/data/tiles.png")] private var ImgTileset:Class;
+		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgLightSet:Class;
 		[Embed(source = "org/lemonparty/data/mark.png")] private var ImgMark:Class;
-		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
+		[Embed(source = "mapData/Level1_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
+		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
 		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void{
 			//FlxG.mouse.hide();
@@ -39,13 +41,16 @@ package{
 			K4G.map = new K4Map();
 			K4G.lights = lights;
 			mapLoader = K4G.map;
-			mapLoader.layerMain.loadMap(new LvlOneData(), ImgTileset, 96, 96, 0, 0, 1,3);
+			mapLoader.layerMain.loadMap(new LvlOneData(), ImgTileset, 16, 16, 0, 0, 1, 1);
+			mapLoader.backLayer.loadMap(new LvlOnePipes(), ImgLightSet, 96, 96, 0, 0, 1, 1);
 			map = mapLoader.layerMain;
+			pipeMap = mapLoader.backLayer;
 			//trace(new LvlOneSprites());
 			mapLoader.loadSprites(new LvlOneSprites());
 			
 			setupPipes();
 			
+			add(mapLoader.backLayer);
 			add(mapLoader.layerMain);
 			add(lightPipes);
 			add(miscObjects);
@@ -84,6 +89,7 @@ package{
 			}else {
 				Ob2.kill();
 			}
+			//Ob1.bite(Ob2);
 		}
 		public function bulletHitEnemy(Ob1:FlxObject, Ob2:FlxObject):void {
 			var proj:Projectile = Ob1 as Projectile;
@@ -97,8 +103,11 @@ package{
 		}
 		
 		public function setupPipes():void {
-			for (var i:uint = 0; i < map.widthInTiles;++i) {
-				
+			for (var i:uint = 0; i < map.heightInTiles;++i) {
+				pipeLookup[i] = new Array();
+				for (var j:uint = 0; j < map.widthInTiles;++j ) {
+					pipeLookup[i][j] = null;
+				}
 			}
 		}
 		

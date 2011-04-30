@@ -6,24 +6,11 @@
     <sprite name="Hero" idx="1" className="units.Hero" image="../src/org/lemonparty/data/hero.png" width="14" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="14" boundsHeight="14" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Spectre" idx="2" className="units.Shadow" image="../src/org/lemonparty/data/spectre.png" width="32" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Lumen" idx="3" className="units.Lumen" image="../src/org/lemonparty/data/lumen.png" width="23" height="23" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="LightStart" idx="4" className="LightStart" image="../src/org/lemonparty/data/lightStart.png" width="16" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
-    <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
-      <maplayer name="pipes" xScroll="1" yScroll="1" x="0" y="0" width="20" height="10" tileset="../src/org/lemonparty/data/backBeam.png" tileWidth="96" tileHeight="96" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
-        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0</row>
-        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0</row>
-        <row>3,3,3,3,3,3,3,3,3,3,0,0,0,0,3,3,3,3,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,2,3,3,3,0,3,2,3,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,2,3,3,3,0,3,2,3,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,2,1,1,1,1,1,1,3,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0</row>
-        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0</row>
-      </maplayer>
-    </group>
     <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
-      <maplayer name="tiles" xScroll="1" yScroll="1" x="0" y="0" width="64" height="48" tileset="../src/org/lemonparty/data/tiles.png" tileWidth="16" tileHeight="16" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+      <maplayer name="tiles" xScroll="1" yScroll="1" x="0" y="0" width="64" height="48" tileset="../src/org/lemonparty/data/tiles.png" tileWidth="16" tileHeight="16" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -44,16 +31,16 @@
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,1,2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,2,2,1,1,1,1,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -74,6 +61,20 @@
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
       </maplayer>
     </group>
+    <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <maplayer name="pipes" xScroll="1" yScroll="1" x="0" y="0" width="20" height="10" tileset="../src/org/lemonparty/data/backBeam.png" tileWidth="96" tileHeight="96" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0</row>
+        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0</row>
+        <row>3,3,3,3,3,3,3,3,3,3,0,0,0,0,3,3,3,3,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,2,3,3,3,0,3,2,3,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,2,3,3,3,0,3,2,3,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,2,1,1,1,1,1,1,3,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0</row>
+        <row>3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0</row>
+      </maplayer>
+    </group>
     <group name="player" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
       <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
         <sprite guid="CF7AA168-DA9D-6834-58A2-F3564DA4E6B6" idx="1" x="80" y="336" angle="0" scaleX="1" scaleY="1" flipped="false"/>
@@ -87,6 +88,11 @@
         <sprite guid="C33FA714-3952-503E-0C0C-AFCB6DA99AE9" idx="2" x="384" y="336" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="1C3E544D-F3BC-92A5-608A-261F5CD8E278" idx="2" x="656" y="304" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="A68C452F-37A7-A62E-64BD-1BF5CC5D1E53" idx="2" x="768" y="336" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+      </spritelayer>
+    </group>
+    <group name="lightPipes" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
+        <sprite guid="08D16C25-9C76-815F-A907-4210987AE50F" idx="4" x="16" y="320" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
   </layers>

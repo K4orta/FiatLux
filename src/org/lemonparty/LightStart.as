@@ -15,7 +15,7 @@ package org.lemonparty
 		public var map:FlxTilemap;
 		public function LightStart(X:Number = 0, Y:Number = 0){
 			super(X, Y);
-			map = K4G.gameMap;
+			map = K4G.logic.pipeMap;
 			dir = RIGHT;
 			normal = new FlxPoint(1, 0);
 			brush.make(int(X/96),int(Y/96))
@@ -25,10 +25,10 @@ package org.lemonparty
 		
 		public function project():void {
 			do {
-				map.setTile(brush.x, brush.y, (Math.abs(normal.x)>Math.abs(normal.y))?1:2)
+				map.setTile(brush.x, brush.y, (Math.abs(normal.x)>Math.abs(normal.y))?3:2)
 				brush.x += normal.x;
 				brush.y += normal.y;
-			}while(map.getTile(brush.x, brush.y)==0);
+			}while(map.getTile(brush.x, brush.y)==1);
 		}
 	}
 

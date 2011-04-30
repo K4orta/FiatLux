@@ -33,6 +33,7 @@ package org.lemonparty {
 		public function K4Map(){
 			colTrans = new ColorTransform();
 			layerMain = new ColorTilemap();
+			backLayer = new ColorTilemap();
 			K4G.gameMap = layerMain;
 			logic = K4G.logic;
 			layerMain.immovable = true;
