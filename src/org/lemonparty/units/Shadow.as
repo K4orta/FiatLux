@@ -1,5 +1,7 @@
 package org.lemonparty.units 
 {
+	import org.lemonparty.aiTrees.branches.*;
+	import org.lemonparty.btree.*;
 	import org.lemonparty.Unit;
 	import org.flixel.FlxG;
 	/**
@@ -19,10 +21,15 @@ package org.lemonparty.units
 			facing = LEFT;
 			hostileGroup = _logic.player;
 			homeGroup = _logic.enemies;
+			cortex = new Selector(this as Unit);
+			cortex.addChild(new BT_Combat(this as Unit));
+			cortex.addChild(new BT_Idle(this as Unit));
 		}
 		
 		override public function update():void {
 			super.update();
+			cortex.run();
+			/*
 			if (_aiDelay <= 0) {
 				attTar = lineOfSight(hostileGroup);
 				if (attTar) {
@@ -31,7 +38,7 @@ package org.lemonparty.units
 				_aiDelay = _aiDelayMax;
 			}else {
 				_aiDelay -= FlxG.elapsed;
-			}
+			}*/
 		}
 		
 	}

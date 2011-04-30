@@ -8,6 +8,7 @@ package org.lemonparty
 	import flash.events.IEventDispatcher;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import org.lemonparty.btree.Node;
 	/**
 	 * ...
 	 * @author Erik Sy Wong
@@ -18,7 +19,7 @@ package org.lemonparty
 		protected var _inField:Boolean;
 		public var attTar:BasicObject;
 		public var susOb:BasicObject;
-		public var cortex:FlxObject;
+		public var cortex:Node;
 		public var sightRange:Number = 300;
 		public var hostileGroup:FlxGroup;
 		public var homeGroup:FlxGroup;
@@ -55,6 +56,16 @@ package org.lemonparty
 		
 		public function alertFriends():void {
 			
+		}
+		
+		public function moveToward(Target:FlxObject):void {
+			var emp:FlxPoint = Target.getMidpoint();
+			var slope:FlxPoint = new FlxPoint(emp.x - x - origin.x, emp.y - y - origin.y);
+			var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
+			var norm:FlxPoint = new FlxPoint(slope.x / len, slope.y / len);
+			
+			velocity.x = _maxRunSpeed * norm.x;
+			velocity.y = _maxRunSpeed * norm.y;
 		}
 		
 		override public function hurt(Damage:Number):void {
