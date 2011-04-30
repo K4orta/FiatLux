@@ -10,6 +10,7 @@ package{
 		public var enemies:FlxGroup = new FlxGroup();
 		public var lights:FlxGroup = new FlxGroup();
 		public var bullets:FlxGroup = new FlxGroup();
+		public var lightPipes:FlxGroup = new FlxGroup();
 		public var marks:FlxGroup = new FlxGroup();
 		public var enemyBullets:FlxGroup = new FlxGroup();
 		public var calendar:TimeKeeper;
@@ -19,8 +20,11 @@ package{
 		public var gui:K4GUI;
 		public var mapLoader:K4Map;
 		public var map:ColorTilemap;
+		public var pipeMap:FlxTilemap; 
 		public var curSel:Unit;
 		public var camFollow:FlxObject = new FlxObject();
+		
+		public var pipeLookup:Array = new Array();
 		
 		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgTileset:Class;
 		[Embed(source = "org/lemonparty/data/mark.png")] private var ImgMark:Class;
@@ -40,8 +44,10 @@ package{
 			//trace(new LvlOneSprites());
 			mapLoader.loadSprites(new LvlOneSprites());
 			
-			add(mapLoader.layerMain);
+			setupPipes();
 			
+			add(mapLoader.layerMain);
+			add(lightPipes);
 			add(miscObjects);
 			add(enemies)
 			add(player);
@@ -87,6 +93,12 @@ package{
 			if (hitLoc) {
 				proj.hits.push(en);
 				proj.hitLocs.push(hitLoc);
+			}
+		}
+		
+		public function setupPipes():void {
+			for (var i:uint = 0; i < map.widthInTiles;++i) {
+				
 			}
 		}
 		

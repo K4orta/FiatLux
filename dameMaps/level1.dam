@@ -6,6 +6,7 @@
     <sprite name="Hero" idx="1" className="units.Hero" image="../src/org/lemonparty/data/hero.png" width="14" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="14" boundsHeight="14" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Spectre" idx="2" className="units.Shadow" image="../src/org/lemonparty/data/spectre.png" width="32" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Lumen" idx="3" className="units.Lumen" image="../src/org/lemonparty/data/lumen.png" width="23" height="23" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="LightStart" idx="4" className="LightStart" image="../src/org/lemonparty/data/lightStart.png" width="16" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -88,6 +89,9 @@
         <sprite guid="1C3E544D-F3BC-92A5-608A-261F5CD8E278" idx="2" x="656" y="304" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="A68C452F-37A7-A62E-64BD-1BF5CC5D1E53" idx="2" x="768" y="336" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
+    </group>
+    <group name="lightPipes" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true"/>
     </group>
   </layers>
   <tileMatrix currentMatrix="0" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="">

@@ -63,6 +63,7 @@ package org.lemonparty {
 			Hero;
 			Shadow;
 			Lumen;
+			LightStart;
 		}
 		
 		public function loadSprites(Data:String):void {
@@ -97,12 +98,12 @@ package org.lemonparty {
 			switch(Name) {
 				case "enemies":
 					return logic.enemies;
-				case "items":
-					return logic.items;
 				case "player":
 					return logic.player;
 				case "miscObjects":
 					return logic.miscObjects;
+				case "lightPipes":
+					return logic.lightPipes;
 				//case "searchables":
 					//return logic.searchables;
 				default:
