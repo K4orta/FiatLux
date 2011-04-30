@@ -15,6 +15,8 @@ package org.lemonparty.units
 		public var canWallJump:Boolean = false;
 		public function Hero(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
+			
+			health = 3;
 			loadGraphic(ImgHero, false, true);
 			_jumpPower = 220;
 			drag.x = _maxRunSpeed * 10;
@@ -50,7 +52,7 @@ package org.lemonparty.units
 				var slope:FlxPoint = new FlxPoint(FlxG.mouse.x-x-origin.x,FlxG.mouse.y-y-origin.y);
 				var slopeLen:Number = sqrt(slope.x * slope.x + slope.y * slope.y);
 				var norm:FlxPoint = new FlxPoint(slope.x / slopeLen, slope.y / slopeLen);
-				_logic.bullets.add(new luxShot(getMidpoint(), norm));
+				_logic.bullets.add(new luxShot(getMidpoint(), norm,2));
 			}
 			
 			//Movements

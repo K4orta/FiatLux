@@ -2,6 +2,7 @@ package{
 	import org.flixel.*;
 	import org.lemonparty.ColorTilemap;
 	import org.lemonparty.*;
+	import org.lemonparty.units.Hero;
 	
 	public class PlayState extends FlxState{
 		
@@ -67,9 +68,17 @@ package{
 			
 			FlxG.collide(collideMap, map);
 			FlxG.overlap(bullets, enemies, bulletHitEnemy);
+			FlxG.overlap(enemies, player, enemyHitPlayer);
 			collideBullets();
 		}
 		
+		public function enemyHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
+			if (Ob2 is Hero) {
+				Ob2.hurt(1);
+			}else {
+				Ob2.kill();
+			}
+		}
 		public function bulletHitEnemy(Ob1:FlxObject, Ob2:FlxObject):void {
 			var proj:Projectile = Ob1 as Projectile;
 			var en:BasicObject = Ob2 as BasicObject;
@@ -115,7 +124,7 @@ package{
 							a.kill();
 						}else if(a.hits[lowI] is GameObject){
 							a.kill();
-							a.hits[lowI].hurt(1);
+							a.hits[lowI].hurt(a.damage);
 							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 						}
 					}

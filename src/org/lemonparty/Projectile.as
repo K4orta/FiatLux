@@ -26,6 +26,7 @@ package org.lemonparty
 		protected var _tracer:FlxSprite;
 		public var hitType:uint=0;
 		public var tracerGfx:Class;
+		public var damage:Number=1;
 		
 		public function Projectile(Ori:FlxPoint, Normal:FlxPoint) {
 			super();

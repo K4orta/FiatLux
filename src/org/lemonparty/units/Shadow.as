@@ -15,7 +15,7 @@ package org.lemonparty.units
 		
 		public function Shadow(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
-			health = 5;
+			health = 10;
 			loadGraphic(ImgShadow, false, true, 32, 32);
 			acceleration.y =0;
 			facing = LEFT;
