@@ -10,6 +10,9 @@ package org.lemonparty
 	 * @author Erik Sy Wong
 	 */
 	public class Projectile extends FlxObject{
+		public static const ANGLE:uint = 1;
+		public static const HITBOX:uint = 0;
+		
 		public var ori:FlxPoint = new FlxPoint();
 		public var slope:FlxPoint = new FlxPoint();
 		public var normal:FlxPoint = new FlxPoint();
@@ -21,7 +24,8 @@ package org.lemonparty
 		public var hits:Vector.<FlxObject>=new Vector.<FlxObject>();
 		public var hitLocs:Vector.<FlxPoint>=new Vector.<FlxPoint>();
 		protected var _tracer:FlxSprite;
-		[Embed(source = "data/tracer.png")] private var ImgShot:Class;
+		public var hitType:uint=0;
+		public var tracerGfx:Class;
 		
 		public function Projectile(Ori:FlxPoint, Normal:FlxPoint) {
 			super();
@@ -49,15 +53,15 @@ package org.lemonparty
 				moves = true;
 				tail.make(head.x, head.y);
 				head.x += velocity.x*FlxG.elapsed;
-				head.y += velocity.y*FlxG.elapsed;
+				head.y += velocity.y * FlxG.elapsed;
 			}
 			
 			if (_tracer) {
 				_tracer.x = tail.x;
 				_tracer.y = tail.y;
 			}else{
-				if (life>0) {
-					addTracer(ImgShot);
+				if (life>0&&tracerGfx) {
+					addTracer(tracerGfx);
 				}
 			}
 			++life;

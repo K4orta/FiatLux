@@ -23,7 +23,7 @@ package org.lemonparty
 			time = 360;
 			_minutes = time-(int(time / 60) * 60);
 			_hours = int(time / 60);
-			FlxG.watch(this, "hours");
+			//FlxG.watch(this, "hours");
 		}
 		
 		public function update() :void{

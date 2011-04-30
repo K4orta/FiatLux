@@ -37,9 +37,9 @@ package org.lemonparty {
 			logic = K4G.logic;
 			layerMain.immovable = true;
 			setupFades();
-			correctFade();
-			K4G.calendar.addEventListener(TimeKeeper.ONHOUR, startFade);
-			K4G.calendar.addEventListener(TimeKeeper.MIDNIGHT, newDay);
+			//correctFade();
+			//K4G.calendar.addEventListener(TimeKeeper.ONHOUR, startFade);
+			//K4G.calendar.addEventListener(TimeKeeper.MIDNIGHT, newDay);
 		}
 		
 		// __________________________________________ EVENT HANDLERS
@@ -54,6 +54,7 @@ package org.lemonparty {
 					_doFade = false;
 				}
 			}
+			
 		}
 		
 		// __________________________________________ METHODS
@@ -116,6 +117,8 @@ package org.lemonparty {
 		}
 		
 		public function setupFades():void {
+			//fadeTimes = [0];
+			//fades.push(new ColorTransform(.5, .5, .8, 1, 0, 0, 0, 0));
 			fadeTimes=[1380,1200,1140,1080,1020,960,720,420,360,300,180,0];
 			fades.push(new ColorTransform(.5, .5, .8, 1, 0, 0, 0, 0));			//11pm
 			fades.push(new ColorTransform(.3, .3, .5, 1, 0, 0, 0, 0));		//8pm
@@ -129,6 +132,7 @@ package org.lemonparty {
 			fades.push(new ColorTransform(.3, .2, .4, 1, 0, 0, 0, 0));		//5am
 			fades.push(new ColorTransform(.5, .5, .8, 1, 0, 0, 0, 0));	//3am
 			fades.push(new ColorTransform(.5, .5, .8, 1, 0, 0, 0, 0));	//1am
+			
 		}
 		
 		public function startFade(ev:Event):void {
