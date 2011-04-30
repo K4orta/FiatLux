@@ -5,6 +5,7 @@
   <spriteEntries>
     <sprite name="Hero" idx="1" className="units.Hero" image="../src/org/lemonparty/data/hero.png" width="14" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="14" boundsHeight="14" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Spectre" idx="2" className="units.Shadow" image="../src/org/lemonparty/data/spectre.png" width="32" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Lumen" idx="3" className="units.Lumen" image="../src/org/lemonparty/data/lumen.png" width="23" height="23" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -76,6 +77,8 @@
     <group name="player" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
       <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
         <sprite guid="CF7AA168-DA9D-6834-58A2-F3564DA4E6B6" idx="1" x="80" y="336" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="EF65FA65-8583-57FF-0992-429B58E3A975" idx="3" x="144" y="320" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="4824D90A-3808-7013-FA29-DC519779C449" idx="3" x="176" y="352" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
     <group name="enemies" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">

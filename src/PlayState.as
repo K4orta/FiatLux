@@ -59,6 +59,12 @@ package{
 			calendar.update();
 			camFollow.x = curSel.x+(FlxG.mouse.screenX-240)+8;
 			camFollow.y = curSel.y+(FlxG.mouse.screenY-120)+16;
+			
+			var fdb:FlxBasic = bullets.getFirstDead();
+			if (fdb)
+				bullets.remove(fdb, true);
+			
+			
 			FlxG.collide(collideMap, map);
 			FlxG.overlap(bullets, enemies, bulletHitEnemy);
 			collideBullets();

@@ -1,4 +1,6 @@
 player units.Hero 80.000 336.000
+player units.Lumen 144.000 320.000
+player units.Lumen 176.000 352.000
 enemies units.Shadow 240.000 304.000
 enemies units.Shadow 384.000 336.000
 enemies units.Shadow 656.000 304.000

@@ -21,8 +21,12 @@ package org.lemonparty
 		public var cortex:FlxObject;
 		public var sightRange:Number = 300;
 		public var hostileGroup:FlxGroup;
+		public var homeGroup:FlxGroup;
 		protected var evd:EventDispatcher = new EventDispatcher(this as IEventDispatcher);
 		public var ptf:FlxPath;
+		public var canAttack:Boolean = true;
+		public var _coolDown:Number= 0;
+		public var _coolTime:Number = 1.5;
 		
 		public var carrying:GameObject;
 		public static const HEALTH_CHANGED:String = "healthChanged";
@@ -39,6 +43,18 @@ package org.lemonparty
 		
 		override public function update():void {
 			super.update();
+		}
+		// Hooks for AI
+		public function enterCombat():void {
+			
+		}
+		
+		public function exitCombat():void {
+			
+		}
+		
+		public function alertFriends():void {
+			
 		}
 		
 		override public function hurt(Damage:Number):void {
