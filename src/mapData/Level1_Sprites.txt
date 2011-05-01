@@ -8,4 +8,4 @@ lightPipes LPipe 480.000 288.000
 lightPipes LPipe 480.000 576.000
 lightPipes LPipe 864.000 576.000
 lightPipes TPipe 864.000 288.000
-lightPipes LPipe 1440.000 288.000
+lightPipes ExitPipe 1440.000 288.000
