@@ -106,10 +106,12 @@ package{
 			var proj:Projectile = Ob1 as Projectile;
 			var en:BasicObject = Ob2 as BasicObject;
 			var hitLoc:FlxPoint;
+			if(en){
 			hitLoc = en.ray(proj.tail, proj.head, proj.normal);
 			if (hitLoc) {
 				proj.hits.push(en);
 				proj.hitLocs.push(hitLoc);
+			}
 			}
 		}
 		

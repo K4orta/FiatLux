@@ -19,7 +19,9 @@ package org.lemonparty
 			map = K4G.logic.pipeMap;
 			dir = RIGHT;
 			normal = new FlxPoint(1, 0);
-			brush.make(int(X/96),int(Y/96))
+			brush.make(int(X / 96), int(Y / 96))
+			//brush.x += normal.x;
+			//brush.y += normal.y;
 		}
 		
 		override public function update():void {
@@ -30,19 +32,17 @@ package org.lemonparty
 		}
 		
 		public function project():void {
-			do {
+			while(map.getTile(brush.x, brush.y)==1){
 				if (K4G.logic.pipeLookup[brush.y][brush.x]) {
 					var bx:FlxPoint = K4G.logic.pipeLookup[brush.y][brush.x].reroute(normal);
-					normal.x = bx.x; 
-					normal.y = bx.y;
-					trace(bx.y);
+					normal = bx;
+					break;
 				}
 				map.setTile(brush.x, brush.y, (Math.abs(normal.x)>Math.abs(normal.y))?3:2)
 				
 				brush.x += normal.x;
 				brush.y += normal.y;
-				
-			}while(map.getTile(brush.x, brush.y)==1);
+			};
 		}
 	}
 

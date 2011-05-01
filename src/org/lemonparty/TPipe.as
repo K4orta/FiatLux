@@ -4,9 +4,9 @@ package org.lemonparty
 	 * ...
 	 * @author K4Orta (Erik Wong)
 	 */
-	public class LPipe extends Pipe {
+	public class TPipe extends Pipe {
 		[Embed(source = "data/LPipe.png")] private var ImgPipe:Class;
-		public function LPipe(X:Number = 0, Y:Number = 0) {
+		public function TPipe(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
 			// god, this is ugly.
 			pipeDirs[directions[UP]] = true;

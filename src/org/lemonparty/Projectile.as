@@ -47,6 +47,7 @@ package org.lemonparty
 			width = FlxU.max(FlxU.abs(x - FlxU.max(ori.x, ori.x+slope.x)),2);
 			height = FlxU.max(FlxU.abs(y - FlxU.max(ori.y, ori.y + slope.y)), 2);
 			moves = false;
+			
 		}
 		
 		override public function update(): void {
