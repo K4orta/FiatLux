@@ -39,7 +39,6 @@ package org.lemonparty
 			pipeDirs[new FlxPoint( -1, 0)] = false;
 			
 			pipeLoc = new FlxPoint(int(x / 96), int(y / 96));
-			trace(pipeLoc.x);
 			_logic.pipeLookup[pipeLoc.y][pipeLoc.x] = this;
 			beams = new Vector.<FlxPoint>();
 			
@@ -134,8 +133,12 @@ package org.lemonparty
 		// takes a direction vector and returns a direction;
 		public function reroute(LightDir:FlxPoint):FlxPoint {
 			//passThrough
-			if (pipeDirs[LightDir] == true) {
-				trace("right through");
+			for (var j:uint = 0; j < directions.length;++j) {
+				if (LightDir.x==directions[j].x && LightDir.y==directions[j].y) {
+					break;
+				}
+			}
+			if (pipeDirs[directions[j]] == true) {
 				shootBeam(LightDir);
 				//beams.push(LightDir);
 				return new FlxPoint(LightDir.x, LightDir.y);
