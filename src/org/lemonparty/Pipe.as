@@ -19,7 +19,7 @@ package org.lemonparty
 		public var pipeDirs:Dictionary = new Dictionary();
 		public var pipeMap:ColorTilemap;
 		public var directions:Vector.<FlxPoint> = new Vector.<FlxPoint>();
-		public var next:Vector.<Pipe>; // Works like a linked list; 
+		public var next:Vector.<Pipe>=new Vector.<Pipe>(); // Works like a linked list; 
 		public var beams:Vector.<FlxPoint>; // Works like a linked list;
 		public var emit:Boolean = false;
 		public var pipeLoc:FlxPoint;
@@ -60,35 +60,17 @@ package org.lemonparty
 			
 			for (var i:uint = 0; i < directions.length-1;++i) {
 				newDict[directions[i+1]] = pipeDirs[directions[i]]
-				//if (i > 0) {
-				//	pipeDirs[directions[i]] = tDir;
-				//}
-				//tDir = pipeDirs[directions[i]];
-				//pipeDirs[directions[i]] = pipeDirs[directions[i + 1]];
-				//trace(pipeDirs[directions[i]]);
 			}
 			pipeDirs = newDict;
-			//pipeDirs[directions[0]] = tDir;
-			
-			var eraser:FlxPoint;
+
+			breakConnections();
+			continueLight();
+		}
+		
+		public function continueLight():void {
 			var gt:uint;
-			if (beams.length > 0) {
-				for (i = 0; i < beams.length;++i) {
-					eraser = new FlxPoint(int(x / 96), int(y / 96));
-					eraser.x += beams[i].x;
-					eraser.y += beams[i].y;
-					gt = pipeMap.getTile(eraser.x, eraser.y);
-					while (gt == 2 || gt == 3 || gt == 4) {
-						pipeMap.setTile(eraser.x, eraser.y, 1)
-						eraser.x += beams[i].x;
-						eraser.y += beams[i].y;
-						gt = pipeMap.getTile(eraser.x, eraser.y);
-					}
-				}
-				beams = new Vector.<FlxPoint>();
-			}
 			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1)
-			for (i = 0; i < directions.length;++i) {
+			for (var i:uint = 0; i < directions.length;++i) {
 				if (pipeDirs[directions[i]]==true) {
 					gt = pipeMap.getTile(pipeLoc.x+directions[i].x, pipeLoc.y+directions[i].y);
 					if ((gt == 2&&Math.abs(y)>x) || (gt == 3&&Math.abs(x)>y)) {
@@ -98,7 +80,6 @@ package org.lemonparty
 					//trace("twice "+i)
 				}
 			}
-			
 		}
 		
 		public function shootBeam(Dir:FlxPoint):void {
@@ -108,6 +89,7 @@ package org.lemonparty
 			while (gt==1||gt==4) {
 				if (K4G.logic.pipeLookup[brush.y][brush.x]) {
 					next.push(K4G.logic.pipeLookup[brush.y][brush.x]);
+					next[next.length-1].continueLight();
 					trace("shot a pipe");
 					break;
 				}
@@ -122,7 +104,31 @@ package org.lemonparty
 		}
 		
 		public function breakConnections():void {
+			//erase beams
+			var eraser:FlxPoint;
+			var gt:uint;
+			if (beams.length > 0) {
+				for (var i:uint = 0; i < beams.length;++i) {
+					eraser = new FlxPoint(int(x / 96), int(y / 96));
+					eraser.x += beams[i].x;
+					eraser.y += beams[i].y;
+					gt = pipeMap.getTile(eraser.x, eraser.y);
+					while (gt == 2 || gt == 3 || gt == 4) {
+						pipeMap.setTile(eraser.x, eraser.y, 1)
+						eraser.x += beams[i].x;
+						eraser.y += beams[i].y;
+						gt = pipeMap.getTile(eraser.x, eraser.y);
+					}
+				}
+				beams = new Vector.<FlxPoint>();
+			}
+			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1)
 			
+			//call this method in any linked pipes
+			for (i = 0; i < next.length;++i) {
+				next[i].breakConnections();
+			}
+			next = new Vector.<Pipe>();
 		}
 		
 		// takes a direction vector and returns a direction;

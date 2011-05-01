@@ -7,3 +7,5 @@ enemies units.Shadow 656.000 304.000
 enemies units.Shadow 768.000 336.000
 lightPipes LightStart 16.000 320.000
 lightPipes LPipe 480.000 288.000
+lightPipes LPipe 480.000 576.000
+lightPipes LPipe 864.000 576.000
