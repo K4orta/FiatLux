@@ -2,9 +2,10 @@ player units.Hero 80.000 336.000
 enemies units.Shadow 384.000 336.000
 enemies units.Shadow 640.000 336.000
 enemies units.TheOmen 1312.000 288.000
+enemies units.SpecTower 1200.000 288.000
 lightPipes LightStart 32.000 320.000
 lightPipes LPipe 480.000 288.000
 lightPipes LPipe 480.000 576.000
 lightPipes LPipe 864.000 576.000
 lightPipes TPipe 864.000 288.000
-lightPipes TPipe 1440.000 288.000
+lightPipes LPipe 1440.000 288.000

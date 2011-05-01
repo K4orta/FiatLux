@@ -14,6 +14,12 @@ package org.lemonparty
 		public static var lights:FlxGroup;
 		public static var gameMap:ColorTilemap;
 		
+		public static var levelTiles:Vector.<Class> = new Vector.<Class>();  
+		public static var levelPipes:Vector.<Class> = new Vector.<Class>();  
+		public static var levelSprites:Vector.<Class> = new Vector.<Class>();  
+		
+		public static var curLevel:uint = 0 ;
+		
 		public function K4G(){
 			
 		}

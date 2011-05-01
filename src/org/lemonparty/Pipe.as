@@ -53,8 +53,6 @@ package org.lemonparty
 		}
 		
 		public function rotate():void {
-			
-			
 			//var tDir:Boolean = false;
 			//var t2:Boolean = false;
 			var newDict:Dictionary = new Dictionary();
@@ -89,17 +87,24 @@ package org.lemonparty
 			var brush:FlxPoint = new FlxPoint(pipeLoc.x + Dir.x, pipeLoc.y + Dir.y);
 			var gt:uint = pipeMap.getTile(brush.x, brush.y);
 			var len:uint = 0;
-			while (gt==4) {
+			var gooed:Boolean;
+			while (gt==4||gt==6) {
 				if (K4G.logic.pipeLookup[brush.y][brush.x]&&K4G.logic.pipeLookup[brush.y][brush.x].next.length<1) {
 					next.push(K4G.logic.pipeLookup[brush.y][brush.x]);
 					next[next.length - 1].continueLight();
 					break;
 				}
-				pipeMap.setTile(brush.x, brush.y, (Math.abs(Dir.x)>Math.abs(Dir.y))?3:2)
+				if(gt==4 &&!gooed){
+					pipeMap.setTile(brush.x, brush.y, (Math.abs(Dir.x) > Math.abs(Dir.y))?3:2)
+					++len;
+				}else {
+					gooed = true;
+				}
 				brush.x += Dir.x;
 				brush.y += Dir.y;
 				gt = pipeMap.getTile(brush.x, brush.y);
-				++len;
+				
+				
 			}
 			if(len>0)
 				beams.push(Dir);

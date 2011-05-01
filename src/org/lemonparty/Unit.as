@@ -63,13 +63,14 @@ package org.lemonparty
 			var emp:FlxPoint = Target.getMidpoint();
 			var slope:FlxPoint = new FlxPoint(emp.x - x - origin.x, emp.y - y - origin.y);
 			var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
-			//var norm:FlxPoint = new FlxPoint(slope.x / len, slope.y / len);
-			if (!moveNormal) {
-				moveNormal = new FlxPoint(slope.x / len, slope.y / len);
-			}
-			
+			moveNormal = new FlxPoint(slope.x / len, slope.y / len);
 			velocity.x = _maxRunSpeed * moveNormal.x;
 			velocity.y = _maxRunSpeed * moveNormal.y;
+			if (moveNormal.x > 0) {
+				facing = RIGHT;
+			}else {
+				facing = LEFT;
+			}
 		}
 		// returns the length to target;
 		public function moveToPoint(Target:FlxPoint):Number {
@@ -141,19 +142,6 @@ package org.lemonparty
 						continue;
 					if (abs(a.getDist(this)) < sightRange) {
 						if(_map.ray(new FlxPoint(x+origin.x, y),new FlxPoint(a.x+a.origin.x, a.y+a.origin.y),rayPnt)){
-							
-							// put a check here to look at miscItems and make sure they don't block 
-							/*for each(var b:GameObject in _logic.miscObjects.members) {
-								if (b.solid||b.blocksSight) {
-									rayPnt.x = x + origin.x;
-									rayPnt.y = y+3;
-									rp2.x = a.x + a.origin.x;
-									rp2.y = a.y + a.origin.y;
-									if (K4G.rayAABB(rayPnt, rp2, b)) {
-										return null;
-									}
-								}
-							}*/
 							return a;
 						}
 					}

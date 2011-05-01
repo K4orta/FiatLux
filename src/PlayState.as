@@ -37,9 +37,6 @@ package{
 		[Embed(source = "org/lemonparty/data/tiles.png")] private var ImgTileset:Class;
 		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgLightSet:Class;
 		[Embed(source = "org/lemonparty/data/mark.png")] private var ImgMark:Class;
-		[Embed(source = "mapData/Level1_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
-		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
-		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void{
 			//FlxG.mouse.hide();
 			pathDebug = new DebugPathDisplay();
@@ -51,13 +48,13 @@ package{
 			K4G.map = new K4Map();
 			K4G.lights = lights;
 			mapLoader = K4G.map;
-			mapLoader.layerMain.loadMap(new LvlOneData(), ImgTileset, 16, 16, 0, 0, 1, 1);
-			mapLoader.backLayer.loadMap(new LvlOnePipes(), ImgLightSet, 96, 96, 0, 0, 1, 4);
+			mapLoader.layerMain.loadMap(new K4G.levelTiles[K4G.curLevel](), ImgTileset, 16, 16, 0, 0, 1, 1);
+			mapLoader.backLayer.loadMap(new K4G.levelPipes[K4G.curLevel](), ImgLightSet, 96, 96, 0, 0, 1, 4);
 			map = mapLoader.layerMain;
 			pipeMap = mapLoader.backLayer;
 			//trace(new LvlOneSprites());
 			setupPipes();
-			mapLoader.loadSprites(new LvlOneSprites());
+			mapLoader.loadSprites(new K4G.levelSprites[K4G.curLevel]());
 			
 			add(mapLoader.backLayer);
 			add(mapLoader.layerMain);
@@ -67,12 +64,14 @@ package{
 			add(player);
 			add(marks);
 			add(bullets);
+			add(enemyBullets);
 			
 			player.add(curSel);
 			enemies.add(omen);
 			// meta groups
 			collideMap.add(player);
 			collideMap.add(enemies);
+			collideMap.add(enemyBullets);
 			bulletsHit.add(enemies);
 			bulletsHit.add(lightPipes);
 			
@@ -107,13 +106,16 @@ package{
 			var fdb:FlxBasic = bullets.getFirstDead();
 			if (fdb)
 				bullets.remove(fdb, true);
+			var fdp:FlxBasic = player.getFirstDead();
+			if (fdp)
+				player.remove(fdp, true);
 		
 			FlxG.collide(collideMap, map);
 			FlxG.overlap(bullets, bulletsHit, bulletHitEnemy);
+			FlxG.overlap(enemyBullets, player, gooHitPlayer);
+			//FlxG.collide(enemyBullets, map, gooHitMap);
 			FlxG.overlap(enemies, player, enemyHitPlayer);
 			collideBullets();
-			
-			
 		}
 		
 		public function enemyHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
@@ -124,6 +126,22 @@ package{
 			}
 			//Ob1.bite(Ob2);
 		}
+		
+		public function gooHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
+			var proj:Projectile = Ob1 as Projectile;
+			var en:BasicObject = Ob2 as BasicObject;
+			en.hurt(proj.damage);
+			proj.kill();
+		}
+		
+		public function gooHitMap(Ob1:FlxObject, Ob2:FlxObject):void {
+			var proj:Projectile = Ob1 as Projectile;
+			var en:FlxSprite = Ob2 as BasicObject;
+			
+			proj.kill();
+			
+		}
+		
 		public function bulletHitEnemy(Ob1:FlxObject, Ob2:FlxObject):void {
 			var proj:Projectile = Ob1 as Projectile;
 			var en:BasicObject = Ob2 as BasicObject;

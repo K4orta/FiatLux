@@ -69,6 +69,7 @@ package org.lemonparty {
 			LPipe;
 			TheOmen;
 			TPipe;
+			SpecTower;
 		}
 		
 		public function loadSprites(Data:String):void {

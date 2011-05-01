@@ -2,13 +2,16 @@ package
 {
 
 	import org.flixel.*;
+	import org.lemonparty.K4G;
 
 	public class MenuState extends FlxState
 	{
 		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
-		
+		[Embed(source = "mapData/Level1_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
+		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
+		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void
 		{
 			FlxG.bgColor = 0xff000000;
@@ -24,9 +27,11 @@ package
 			playButton.label.color = devButton.label.color;
 			add(playButton);
 			
-			
 			FlxG.mouse.show();
 			
+			K4G.levelTiles.push(LvlOneData);
+			K4G.levelPipes.push(LvlOnePipes);
+			K4G.levelSprites.push(LvlOneSprites);
 		}
 		
 		override public function update():void

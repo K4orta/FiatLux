@@ -28,10 +28,10 @@ package org.lemonparty
 		public var tracerGfx:Class;
 		public var damage:Number=1;
 		
-		public function Projectile(Ori:FlxPoint, Normal:FlxPoint) {
+		public function Projectile(Ori:FlxPoint, Normal:FlxPoint, SSpeed:Number=2000) {
 			super();
 			ori=Ori;
-			speed = 1800;
+			speed = SSpeed;
 			normal = Normal;
 			slope.make(Normal.x * speed * FlxG.elapsed, Normal.y * speed * FlxG.elapsed);
 			
