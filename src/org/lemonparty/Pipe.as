@@ -1,45 +1,69 @@
 package org.lemonparty 
 {
+	import flash.utils.Dictionary;
+	import org.flixel.FlxPoint;
 	/**
 	 * ...
 	 * @author K4Orta (Erik Wong)
 	 */
 	public class Pipe extends BasicObject 
-	{
-		public static const CW:uint = 1;
-		public static const CCW:uint = 0;
+	{		
 		
+		public static const UP:uint = 0;
+		public static const RIGHT:uint = 1;
+		public static const DOWN:uint = 2;
+		public static const LEFT:uint = 3;
 		
+		//[Embed(source = "data/LPipe.png")] private var ImgPipe:Class;
+		public var pipeDirs:Dictionary = new Dictionary();
+		public var directions:Vector.<FlxPoint> = new Vector.<FlxPoint>();
+		public var next:Vector.<Pipe>; // Works like a linked list; 
+		public var beams:Vector.<FlxPoint>; // Works like a linked list;
+		public var emit:Boolean = false;
 		
-		protected var _top:Boolean = false;
-		protected var _left:Boolean = false;
-		protected var _right:Boolean = false;
-		protected var _bottom:Boolean = false;
-		protected var _pipeDirs:Vector.<Boolean> = new Vector.<Boolean>();
-		public function Pipe(X:Number = 0, Y:Number = 0, SimpleGraphic:Class = null) {
-			super(X, Y, SimpleGraphic);
+		public function Pipe(X:Number = 0, Y:Number = 0) {
+			super(X, Y);
 			// top, right, bottom, left
-			_pipeDirs.push(false);
-			_pipeDirs.push(false);
-			_pipeDirs.push(false);
-			_pipeDirs.push(false);
-		}
-		
-		public function rotate(Dir:uint) {
-			var tDir:Boolean = false;
-			var i:uint = 0;
-			if (Dir == CCW) {
-				i = 0;
-			}else {
-				i = _pipeDirs.length;
-			}
-			while (i>=0&&i<_pipeDirs.length) {
-				tDir = _pipeDirs[i];
-			}
+			directions.push(new FlxPoint(0, -1));
+			directions.push(new FlxPoint(1, 0));
+			directions.push(new FlxPoint(0, 1));
+			directions.push(new FlxPoint(-1, 0));
 			
-			 
+			pipeDirs[new FlxPoint(0, -1)] = false;
+			pipeDirs[new FlxPoint(1, 0)] = false;
+			pipeDirs[new FlxPoint(0, 1)] = false;
+			pipeDirs[new FlxPoint( -1, 0)] = false;
+			
+			var vat:FlxPoint = new FlxPoint(6, 7);
+			_logic.pipeLookup[int(y / 96)][int(x / 96)] = this;
 		}
 		
+		override public function hurt(Damage:Number):void {
+			
+		}
+		
+		public function rotate():void {
+			var tDir:Boolean = false;
+			tDir = pipeDirs[directions[LEFT]];
+			for (var i:uint = 1; i < directions.length;++i) {
+				pipeDirs[directions[i]] = pipeDirs[directions[i - 1]];
+			}
+			pipeDirs[directions[0]] = tDir;
+		}
+		
+		public function shootBeam(Dir:FlxPoint):void {
+			
+		}
+		
+		public function breakConnections():void {
+			
+		}
+		
+		// takes a direction vector and returns a direction;
+		public function reroute(LightDir:FlxPoint):FlxPoint {
+			//passThrough
+			return new FlxPoint(-LightDir.y,LightDir.x);
+		}
 		
 	}
 

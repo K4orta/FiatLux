@@ -16,6 +16,7 @@ package{
 		public var calendar:TimeKeeper;
 		public var miscObjects:FlxGroup = new FlxGroup();
 		public var collideMap:FlxGroup = new FlxGroup();
+		public var bulletsHit:FlxGroup = new FlxGroup();
 		public var items:FlxGroup = new FlxGroup();
 		public var gui:K4GUI;
 		public var mapLoader:K4Map;
@@ -46,9 +47,8 @@ package{
 			map = mapLoader.layerMain;
 			pipeMap = mapLoader.backLayer;
 			//trace(new LvlOneSprites());
-			mapLoader.loadSprites(new LvlOneSprites());
-			
 			setupPipes();
+			mapLoader.loadSprites(new LvlOneSprites());
 			
 			add(mapLoader.backLayer);
 			add(mapLoader.layerMain);
@@ -58,11 +58,23 @@ package{
 			add(player);
 			add(marks);
 			add(bullets);
+			
 			player.add(curSel);
+			// meta groups
 			collideMap.add(player);
 			collideMap.add(enemies);
+			bulletsHit.add(enemies);
+			bulletsHit.add(lightPipes);
+			
 			FlxG.camera.setBounds(0, 0, map.width, map.height,true);
 			FlxG.camera.follow(camFollow);
+			
+			/*var norm:FlxPoint = new FlxPoint(1,0);
+			var tn:FlxPoint = new FlxPoint();
+			tn.x = norm.y;
+			tn.y = -norm.x 
+			trace(tn.x);
+			trace(tn.y);*/
 		}
 		
 		override public function update():void {
@@ -75,10 +87,9 @@ package{
 			var fdb:FlxBasic = bullets.getFirstDead();
 			if (fdb)
 				bullets.remove(fdb, true);
-			
-			
+		
 			FlxG.collide(collideMap, map);
-			FlxG.overlap(bullets, enemies, bulletHitEnemy);
+			FlxG.overlap(bullets, bulletsHit, bulletHitEnemy);
 			FlxG.overlap(enemies, player, enemyHitPlayer);
 			collideBullets();
 		}
@@ -143,7 +154,7 @@ package{
 						if (a.hits[lowI] is FlxTilemap) {
 							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 							a.kill();
-						}else if(a.hits[lowI] is GameObject){
+						}else if(a.hits[lowI] is BasicObject){
 							a.kill();
 							a.hits[lowI].hurt(a.damage);
 							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
