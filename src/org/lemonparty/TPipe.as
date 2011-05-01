@@ -5,12 +5,12 @@ package org.lemonparty
 	 * @author K4Orta (Erik Wong)
 	 */
 	public class TPipe extends Pipe {
-		[Embed(source = "data/LPipe.png")] private var ImgPipe:Class;
+		[Embed(source = "data/TPipe.png")] private var ImgPipe:Class;
 		public function TPipe(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
-			// god, this is ugly.
 			pipeDirs[directions[UP]] = true;
 			pipeDirs[directions[LEFT]] = true;
+			pipeDirs[directions[RIGHT]] = true;
 			loadRotatedGraphic(ImgPipe, 4);
 			width = 16;
 			height = 16;

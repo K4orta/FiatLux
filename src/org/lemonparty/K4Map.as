@@ -67,6 +67,7 @@ package org.lemonparty {
 			LightStart;
 			Pipe;
 			LPipe;
+			TPipe;
 		}
 		
 		public function loadSprites(Data:String):void {

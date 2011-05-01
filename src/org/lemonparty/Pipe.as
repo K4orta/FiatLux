@@ -38,7 +38,8 @@ package org.lemonparty
 			pipeDirs[new FlxPoint(0, 1)] = false;
 			pipeDirs[new FlxPoint( -1, 0)] = false;
 			
-			pipeLoc = new FlxPoint(int(x / 96),int(y / 96));
+			pipeLoc = new FlxPoint(int(x / 96), int(y / 96));
+			trace(pipeLoc.x);
 			_logic.pipeLookup[pipeLoc.y][pipeLoc.x] = this;
 			beams = new Vector.<FlxPoint>();
 			
@@ -73,9 +74,9 @@ package org.lemonparty
 			for (var i:uint = 0; i < directions.length;++i) {
 				if (pipeDirs[directions[i]]==true) {
 					gt = pipeMap.getTile(pipeLoc.x+directions[i].x, pipeLoc.y+directions[i].y);
-					if ((gt == 2&&Math.abs(y)>x) || (gt == 3&&Math.abs(x)>y)) {
+					if ((gt == 2&&Math.abs(directions[i].y)>directions[i].x) || (gt == 3&&Math.abs(directions[i].x)>directions[i].y)) {
 						reroute(new FlxPoint( -directions[i].x, -directions[i].y));
-						pipeMap.setTile(pipeLoc.x, pipeLoc.y, 4);
+						pipeMap.setTile(pipeLoc.x, pipeLoc.y, 4, false );
 					}
 					//trace("twice "+i)
 				}
@@ -86,11 +87,10 @@ package org.lemonparty
 			var brush:FlxPoint = new FlxPoint(pipeLoc.x + Dir.x, pipeLoc.y + Dir.y);
 			var gt:uint = pipeMap.getTile(brush.x, brush.y);
 			var len:uint = 0;
-			while (gt==1||gt==4) {
-				if (K4G.logic.pipeLookup[brush.y][brush.x]) {
+			while (gt==1) {
+				if (K4G.logic.pipeLookup[brush.y][brush.x]&&K4G.logic.pipeLookup[brush.y][brush.x].next.length<1) {
 					next.push(K4G.logic.pipeLookup[brush.y][brush.x]);
-					next[next.length-1].continueLight();
-					trace("shot a pipe");
+					next[next.length - 1].continueLight();
 					break;
 				}
 				pipeMap.setTile(brush.x, brush.y, (Math.abs(Dir.x)>Math.abs(Dir.y))?3:2)
@@ -113,7 +113,7 @@ package org.lemonparty
 					eraser.x += beams[i].x;
 					eraser.y += beams[i].y;
 					gt = pipeMap.getTile(eraser.x, eraser.y);
-					while (gt == 2 || gt == 3 || gt == 4) {
+					while (gt == 2 || gt == 3) {
 						pipeMap.setTile(eraser.x, eraser.y, 1)
 						eraser.x += beams[i].x;
 						eraser.y += beams[i].y;
@@ -122,7 +122,7 @@ package org.lemonparty
 				}
 				beams = new Vector.<FlxPoint>();
 			}
-			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1)
+			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1,false);
 			
 			//call this method in any linked pipes
 			for (i = 0; i < next.length;++i) {
