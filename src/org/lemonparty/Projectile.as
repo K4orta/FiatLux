@@ -31,7 +31,7 @@ package org.lemonparty
 		public function Projectile(Ori:FlxPoint, Normal:FlxPoint) {
 			super();
 			ori=Ori;
-			speed = 2400;
+			speed = 1800;
 			normal = Normal;
 			slope.make(Normal.x * speed * FlxG.elapsed, Normal.y * speed * FlxG.elapsed);
 			

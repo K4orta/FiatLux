@@ -67,6 +67,7 @@ package org.lemonparty {
 			LightStart;
 			Pipe;
 			LPipe;
+			TheOmen;
 			TPipe;
 		}
 		
@@ -88,9 +89,9 @@ package org.lemonparty {
 			for each(a in lines) {
 				if (a.length>1) {
 					entry = a.split(" ");
-					if (entry[1] == "units.Hero")
+					if (entry[1] == "units.Hero"){
 						continue;
-					
+					}
 					df= getDefinitionByName("org.lemonparty."+entry[1]) as Class;
 					findGroup(entry[0]).add(new df(Number(entry[2]), Number(entry[3])));
 					

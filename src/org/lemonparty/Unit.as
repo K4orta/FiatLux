@@ -28,6 +28,7 @@ package org.lemonparty
 		public var canAttack:Boolean = true;
 		public var _coolDown:Number= 0;
 		public var _coolTime:Number = 1.5;
+		public var moveNormal:FlxPoint;
 		
 		public var carrying:GameObject;
 		public static const HEALTH_CHANGED:String = "healthChanged";
@@ -62,10 +63,23 @@ package org.lemonparty
 			var emp:FlxPoint = Target.getMidpoint();
 			var slope:FlxPoint = new FlxPoint(emp.x - x - origin.x, emp.y - y - origin.y);
 			var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
-			var norm:FlxPoint = new FlxPoint(slope.x / len, slope.y / len);
+			//var norm:FlxPoint = new FlxPoint(slope.x / len, slope.y / len);
+			if (!moveNormal) {
+				moveNormal = new FlxPoint(slope.x / len, slope.y / len);
+			}
 			
-			velocity.x = _maxRunSpeed * norm.x;
-			velocity.y = _maxRunSpeed * norm.y;
+			velocity.x = _maxRunSpeed * moveNormal.x;
+			velocity.y = _maxRunSpeed * moveNormal.y;
+		}
+		// returns the length to target;
+		public function moveToPoint(Target:FlxPoint):Number {
+			var slope:FlxPoint = new FlxPoint(Target.x - x - origin.x, Target.y - y - origin.y);
+			var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
+			
+			moveNormal = new FlxPoint(slope.x / len, slope.y / len);
+			velocity.x = _maxRunSpeed * moveNormal.x;
+			velocity.y = _maxRunSpeed * moveNormal.y;
+			return len;
 		}
 		
 		override public function hurt(Damage:Number):void {

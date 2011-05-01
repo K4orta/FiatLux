@@ -1,8 +1,10 @@
 package{
 	import org.flixel.*;
+	import org.flixel.plugin.DebugPathDisplay;
 	import org.lemonparty.ColorTilemap;
 	import org.lemonparty.*;
 	import org.lemonparty.units.Hero;
+	import org.lemonparty.units.TheOmen;
 	
 	public class PlayState extends FlxState{
 		
@@ -23,9 +25,14 @@ package{
 		public var map:ColorTilemap;
 		public var pipeMap:ColorTilemap; 
 		public var curSel:Unit;
+		public var omen:Unit;
+		public var pathThrough:FlxPath;
 		public var camFollow:FlxObject = new FlxObject();
 		
+		public var firstPipe:Pipe;
+		
 		public var pipeLookup:Array = new Array();
+		public var pathDebug:DebugPathDisplay;
 		
 		[Embed(source = "org/lemonparty/data/tiles.png")] private var ImgTileset:Class;
 		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgLightSet:Class;
@@ -35,6 +42,8 @@ package{
 		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void{
 			//FlxG.mouse.hide();
+			pathDebug = new DebugPathDisplay();
+			FlxG.addPlugin(pathDebug);
 			FlxG.bgColor = 0xff3b424f;
 			K4G.logic = this;
 			calendar = new TimeKeeper();
@@ -43,7 +52,7 @@ package{
 			K4G.lights = lights;
 			mapLoader = K4G.map;
 			mapLoader.layerMain.loadMap(new LvlOneData(), ImgTileset, 16, 16, 0, 0, 1, 1);
-			mapLoader.backLayer.loadMap(new LvlOnePipes(), ImgLightSet, 96, 96, 0, 0, 1, 1);
+			mapLoader.backLayer.loadMap(new LvlOnePipes(), ImgLightSet, 96, 96, 0, 0, 1, 4);
 			map = mapLoader.layerMain;
 			pipeMap = mapLoader.backLayer;
 			//trace(new LvlOneSprites());
@@ -60,6 +69,7 @@ package{
 			add(bullets);
 			
 			player.add(curSel);
+			enemies.add(omen);
 			// meta groups
 			collideMap.add(player);
 			collideMap.add(enemies);
@@ -75,6 +85,16 @@ package{
 			tn.y = -norm.x 
 			trace(tn.x);
 			trace(tn.y);*/
+			
+			for each (var a:Unit in enemies.members) {
+				if (a is TheOmen) {
+					omen = a;
+					break;
+				}
+			}
+			
+			trace(firstPipe);
+			
 		}
 		
 		override public function update():void {
@@ -92,6 +112,8 @@ package{
 			FlxG.overlap(bullets, bulletsHit, bulletHitEnemy);
 			FlxG.overlap(enemies, player, enemyHitPlayer);
 			collideBullets();
+			
+			
 		}
 		
 		public function enemyHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
@@ -154,12 +176,12 @@ package{
 					}
 					if (lowI > -1) {
 						if (a.hits[lowI] is FlxTilemap) {
-							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
+							//mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 							a.kill();
 						}else if(a.hits[lowI] is BasicObject){
 							a.kill();
 							a.hits[lowI].hurt(a.damage);
-							mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
+							//mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 						}
 					}
 				}

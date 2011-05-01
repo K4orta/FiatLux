@@ -7,9 +7,7 @@ package org.lemonparty
 	 * ...
 	 * @author K4Orta (Erik Wong)
 	 */
-	public class Pipe extends BasicObject 
-	{		
-		
+	public class Pipe extends BasicObject {		
 		public static const UP:uint = 0;
 		public static const RIGHT:uint = 1;
 		public static const DOWN:uint = 2;
@@ -42,11 +40,16 @@ package org.lemonparty
 			_logic.pipeLookup[pipeLoc.y][pipeLoc.x] = this;
 			beams = new Vector.<FlxPoint>();
 			
+			if (!_logic.firstPipe) {
+				_logic.firstPipe = this;
+			}
 		}
 		
 		override public function hurt(Damage:Number):void {
-			angle += 90;
-			rotate();
+			if(Damage>1){
+				angle += 90;
+				rotate();
+			}
 		}
 		
 		public function rotate():void {
@@ -69,13 +72,13 @@ package org.lemonparty
 		
 		public function continueLight():void {
 			var gt:uint;
-			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1)
+			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 4)
 			for (var i:uint = 0; i < directions.length;++i) {
 				if (pipeDirs[directions[i]]==true) {
 					gt = pipeMap.getTile(pipeLoc.x+directions[i].x, pipeLoc.y+directions[i].y);
 					if ((gt == 2&&Math.abs(directions[i].y)>directions[i].x) || (gt == 3&&Math.abs(directions[i].x)>directions[i].y)) {
 						reroute(new FlxPoint( -directions[i].x, -directions[i].y));
-						pipeMap.setTile(pipeLoc.x, pipeLoc.y, 4, false );
+						pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1, false );
 					}
 					//trace("twice "+i)
 				}
@@ -86,7 +89,7 @@ package org.lemonparty
 			var brush:FlxPoint = new FlxPoint(pipeLoc.x + Dir.x, pipeLoc.y + Dir.y);
 			var gt:uint = pipeMap.getTile(brush.x, brush.y);
 			var len:uint = 0;
-			while (gt==1) {
+			while (gt==4) {
 				if (K4G.logic.pipeLookup[brush.y][brush.x]&&K4G.logic.pipeLookup[brush.y][brush.x].next.length<1) {
 					next.push(K4G.logic.pipeLookup[brush.y][brush.x]);
 					next[next.length - 1].continueLight();
@@ -113,7 +116,7 @@ package org.lemonparty
 					eraser.y += beams[i].y;
 					gt = pipeMap.getTile(eraser.x, eraser.y);
 					while (gt == 2 || gt == 3) {
-						pipeMap.setTile(eraser.x, eraser.y, 1)
+						pipeMap.setTile(eraser.x, eraser.y, 4)
 						eraser.x += beams[i].x;
 						eraser.y += beams[i].y;
 						gt = pipeMap.getTile(eraser.x, eraser.y);
@@ -121,7 +124,7 @@ package org.lemonparty
 				}
 				beams = new Vector.<FlxPoint>();
 			}
-			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1,false);
+			pipeMap.setTile(pipeLoc.x, pipeLoc.y, 4,false);
 			
 			//call this method in any linked pipes
 			for (i = 0; i < next.length;++i) {
@@ -154,11 +157,33 @@ package org.lemonparty
 				}
 			}
 			
-			
 			return new FlxPoint(LightDir.x, LightDir.y);
-				//return new FlxPoint(-LightDir.y,LightDir.x);
 		}
 		
+		public function whichWay(LightDir:FlxPoint):FlxPoint {
+			//passThrough
+			for (var j:uint = 0; j < directions.length;++j) {
+				if (LightDir.x==directions[j].x && LightDir.y==directions[j].y) {
+					break;
+				}
+			}
+			if (pipeDirs[directions[j]] == true) {
+				//beams.push(LightDir);
+				return new FlxPoint(directions[j].x, directions[j].y);
+			}
+			var rev:FlxPoint = new FlxPoint(-LightDir.x,-LightDir.y);
+			for (var i:uint = 0; i < directions.length;++i) {
+				if (directions[i] == rev){
+					continue;
+				}else if (pipeDirs[directions[i]] == false) {
+					continue;
+				}else if(pipeDirs[directions[i]]==true){
+					return new FlxPoint(directions[i].x, directions[i].y);
+				}
+			}
+			
+			return new FlxPoint(LightDir.x, LightDir.y);
+		}
 	}
 
 }
