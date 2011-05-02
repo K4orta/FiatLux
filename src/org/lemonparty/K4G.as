@@ -18,7 +18,7 @@ package org.lemonparty
 		public static var levelPipes:Vector.<Class> = new Vector.<Class>();  
 		public static var levelSprites:Vector.<Class> = new Vector.<Class>();  
 		
-		public static var curLevel:uint = 0 ;
+		public static var curLevel:uint = 0;
 		
 		public function K4G(){
 			

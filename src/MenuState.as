@@ -12,6 +12,10 @@ package
 		[Embed(source = "mapData/Level0_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
 		[Embed(source = "mapData/Level0_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
 		[Embed(source = "mapData/Level0_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
+		
+		[Embed(source = "mapData/Level2_tiles.txt", mimeType = "application/octet-stream") ] private var Lvl2Data:Class;
+		[Embed(source = "mapData/Level2_pipes.txt", mimeType = "application/octet-stream") ] private var Lvl2Pipes:Class;
+		[Embed(source = "mapData/Level2_Sprites.txt", mimeType = "application/octet-stream") ] private var Lvl2Sprites:Class;
 		override public function create():void
 		{
 			FlxG.bgColor = 0xff000000;
@@ -25,24 +29,27 @@ package
 			playButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 100, "Click To Play", onPlay, onOver);
 			playButton.color = devButton.color;
 			playButton.label.color = devButton.label.color;
-			add(playButton);
+			//add(playButton);
 			
 			FlxG.mouse.show();
 			
 			K4G.levelTiles.push(LvlOneData);
 			K4G.levelPipes.push(LvlOnePipes);
 			K4G.levelSprites.push(LvlOneSprites);
+			K4G.levelTiles.push(Lvl2Data);
+			K4G.levelPipes.push(Lvl2Pipes);
+			K4G.levelSprites.push(Lvl2Sprites);
+			
+			FlxG.switchState(new PlayState());
 		}
 		
-		override public function update():void
-		{
+		override public function update():void{
 			super.update();	
 		}
 		
 		protected function onSite():void
 		{
 			
-			FlxU.openURL("http://devianix.com/");
 		}
 		
 		protected function onPlay():void

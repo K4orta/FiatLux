@@ -16,6 +16,8 @@
     <sprite name="Text1" idx="11" className="FlxText1" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Text1_2" idx="12" className="FlxText2" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Text1_2_2_" idx="13" className="FlxText3" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Text1_2_2__2_" idx="14" className="FlxText4" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Text1_2_2__2__2_" idx="15" className="FlxText5" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -118,6 +120,8 @@
         </sprite>
         <sprite guid="BD1C5363-83E9-1826-0A50-DEFC63B4A70E" idx="12" x="197" y="501" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="DCB6CF2D-039E-5033-87D6-B0F368FD05FB" idx="13" x="699" y="347" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="0AF3200D-E59D-3A9A-D962-4A9CA323961F" idx="14" x="98" y="306" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="B0E4E2AC-BD9C-A2D8-EFED-4F4B810DBB9A" idx="15" x="1666" y="386" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
   </layers>

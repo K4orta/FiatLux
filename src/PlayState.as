@@ -148,7 +148,12 @@ package{
 		
 		public function scoreScreen():void {
 			++K4G.curLevel;
-			FlxG.switchState(new PlayState());
+			if(K4G.curLevel<2){
+				FlxG.switchState(new PlayState());
+			}else {
+				FlxG.switchState(new VictoryState());
+			}
+		
 		}
 		
 		public function enemyHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
