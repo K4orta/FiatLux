@@ -7,7 +7,7 @@ package{
 
 		public function Dangerous2Go(){
 			super(480,240,MenuState,2, 60, 60);
-			forceDebugger = true;
+			
 		}
 
 	}
