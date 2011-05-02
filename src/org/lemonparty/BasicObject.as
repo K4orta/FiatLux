@@ -165,6 +165,9 @@ package org.lemonparty
 			return b;
 		}
 		
+		public function shotBy(Tar:Unit):void {
+		}
+		
 		public function copyColor(Color:ColorTransform):ColorTransform {
 			return new ColorTransform(Color.redMultiplier,Color.greenMultiplier,Color.blueMultiplier);
 		}

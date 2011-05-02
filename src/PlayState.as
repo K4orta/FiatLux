@@ -4,6 +4,7 @@ package{
 	import org.lemonparty.ColorTilemap;
 	import org.lemonparty.*;
 	import org.lemonparty.units.Hero;
+	import org.lemonparty.units.Shadow;
 	import org.lemonparty.units.TheOmen;
 	
 	public class PlayState extends FlxState{
@@ -15,6 +16,7 @@ package{
 		public var lightPipes:FlxGroup = new FlxGroup();
 		public var marks:FlxGroup = new FlxGroup();
 		public var enemyBullets:FlxGroup = new FlxGroup();
+		public var particles:FlxGroup = new FlxGroup();
 		public var calendar:TimeKeeper;
 		public var miscObjects:FlxGroup = new FlxGroup();
 		public var collideMap:FlxGroup = new FlxGroup();
@@ -30,15 +32,24 @@ package{
 		public var camFollow:FlxObject = new FlxObject();
 		
 		public var firstPipe:Pipe;
-		
+		public var spawnPoint:FlxPoint;
 		public var pipeLookup:Array = new Array();
+		public var redrawOnGoo:Vector.<Pipe>=new Vector.<Pipe>();
 		public var pathDebug:DebugPathDisplay;
 		
+		public var victory:Boolean = false;
+		
+		public var sparks:FlxEmitter = new FlxEmitter(0,0,100);
+		public var bloodPart:FlxEmitter = new FlxEmitter(0,0,100);
+		[Embed(source = "org/lemonparty/data/sparkParts.png")] private var ImgSparks:Class;
+		[Embed(source = "org/lemonparty/data/gooParts.png")] private var ImgBlood:Class;
+		[Embed(source = "org/lemonparty/data/crosshair.png")] private var ImgCrosshair:Class;
 		[Embed(source = "org/lemonparty/data/tiles.png")] private var ImgTileset:Class;
 		[Embed(source = "org/lemonparty/data/backBeam.png")] private var ImgLightSet:Class;
 		[Embed(source = "org/lemonparty/data/mark.png")] private var ImgMark:Class;
 		override public function create():void{
 			//FlxG.mouse.hide();
+			FlxG.mouse.load(ImgCrosshair,2,-11,-11);
 			pathDebug = new DebugPathDisplay();
 			FlxG.addPlugin(pathDebug);
 			FlxG.bgColor = 0xff3b424f;
@@ -65,12 +76,15 @@ package{
 			add(marks);
 			add(bullets);
 			add(enemyBullets);
+			add(particles)
 			
 			player.add(curSel);
+			spawnPoint= new FlxPoint(curSel.x, curSel.y);
 			enemies.add(omen);
 			// meta groups
 			collideMap.add(player);
 			collideMap.add(enemies);
+			collideMap.add(particles);
 			collideMap.add(enemyBullets);
 			bulletsHit.add(enemies);
 			bulletsHit.add(lightPipes);
@@ -78,13 +92,25 @@ package{
 			FlxG.camera.setBounds(0, 0, map.width, map.height,true);
 			FlxG.camera.follow(camFollow);
 			
+			bloodPart.setXSpeed(-100,100);
+			bloodPart.setYSpeed( -100, 100);
+			bloodPart.bounce = .1;
+			bloodPart.makeParticles(ImgBlood, 100, 16, true);
+			particles.add(bloodPart);
+			
+			sparks.setXSpeed(-300,300);
+			sparks.setYSpeed( -300, 300);
+			sparks.bounce = .3;
+			sparks.makeParticles(ImgSparks, 100, 16, true);
+			particles.add(sparks);
+			FlxG.flash(0xffffffff, 2);
 			/*var norm:FlxPoint = new FlxPoint(1,0);
 			var tn:FlxPoint = new FlxPoint();
 			tn.x = norm.y;
 			tn.y = -norm.x 
 			trace(tn.x);
 			trace(tn.y);*/
-			
+			/*
 			for each (var a:Unit in enemies.members) {
 				if (a is TheOmen) {
 					omen = a;
@@ -93,7 +119,7 @@ package{
 			}
 			
 			trace(firstPipe);
-			
+			*/
 		}
 		
 		override public function update():void {
@@ -118,28 +144,47 @@ package{
 			collideBullets();
 		}
 		
+		public function scoreScreen():void {
+			++K4G.curLevel;
+			FlxG.switchState(new PlayState());
+		}
+		
 		public function enemyHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
-			if (Ob2 is Hero) {
-				Ob2.hurt(1);
-			}else {
-				Ob2.kill();
-			}
-			//Ob1.bite(Ob2);
+			var en:Unit = Ob1 as Unit;
+			var pl:BasicObject = Ob2 as BasicObject;
+			en.bite(pl);
 		}
 		
 		public function gooHitPlayer(Ob1:FlxObject, Ob2:FlxObject):void {
 			var proj:Projectile = Ob1 as Projectile;
 			var en:BasicObject = Ob2 as BasicObject;
-			en.hurt(proj.damage);
+			var gmp:FlxPoint = proj.getMidpoint();
+			if(en is Hero){
+				en.hurt(proj.damage);
+			}else {
+				en.hurt(proj.damage*2);
+			}
+			blood(gmp.x,gmp.y);
 			proj.kill();
 		}
 		
 		public function gooHitMap(Ob1:FlxObject, Ob2:FlxObject):void {
 			var proj:Projectile = Ob1 as Projectile;
 			var en:FlxSprite = Ob2 as BasicObject;
-			
+			var gmp:FlxPoint = proj.getMidpoint();
+			blood(gmp.x,gmp.y);
 			proj.kill();
 			
+		}
+		
+		public function redrawOnGooChange():void {
+			var trp:Vector.<Pipe> = redrawOnGoo;
+			redrawOnGoo = new Vector.<Pipe>();
+			for each(var a:Pipe in trp) {
+				if(a){
+					a.redrawLight();
+				}
+			}
 		}
 		
 		public function bulletHitEnemy(Ob1:FlxObject, Ob2:FlxObject):void {
@@ -195,15 +240,34 @@ package{
 					if (lowI > -1) {
 						if (a.hits[lowI] is FlxTilemap) {
 							//mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
+							
+							spark( a.hitLocs[lowI].x, a.hitLocs[lowI].y);
+							
 							a.kill();
 						}else if(a.hits[lowI] is BasicObject){
 							a.kill();
+							if((a as Projectile).shooter&&a.hits[lowI] is Unit)
+								(a.hits[lowI]as Unit).shotBy((a as Projectile).shooter);
 							a.hits[lowI].hurt(a.damage);
+							spark( a.hitLocs[lowI].x, a.hitLocs[lowI].y);
+							
 							//mark(a.hitLocs[lowI].x,a.hitLocs[lowI].y);
 						}
 					}
 				}
 			}
+		}
+		
+		public function spark(X:Number, Y:Number):void {
+			sparks.x = X;
+			sparks.y = Y
+			sparks.start(true, .5, 0.1, 8);
+		}
+		
+		public function blood(X:Number, Y:Number):void {
+			bloodPart.x = X;
+			bloodPart.y = Y;
+			bloodPart.start(true, .7, 0.1, 16);
 		}
 		
 		public function mark(X:Number, Y:Number):void {

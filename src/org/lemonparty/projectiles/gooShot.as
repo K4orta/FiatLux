@@ -4,6 +4,7 @@ package org.lemonparty.projectiles
 	import org.lemonparty.Projectile;
 	import org.flixel.FlxSprite;
 	import org.lemonparty.K4G;
+	import org.lemonparty.Unit;
 	/**
 	 * ...
 	 * @author K4Orta (Erik Wong)
@@ -11,8 +12,8 @@ package org.lemonparty.projectiles
 	public class gooShot extends Projectile 
 	{
 		[Embed(source = "../data/gooShot.png")] private var ImgShot:Class;
-		public function gooShot(Ori:FlxPoint, Normal:FlxPoint, Damage:Number=2){
-			super(Ori, Normal, 350);
+		public function gooShot(Ori:FlxPoint, Normal:FlxPoint, Damage:Number=1, Shooter:Unit=null){
+			super(Ori, Normal, 350,Shooter);
 			hitType = HITBOX;
 			
 			tracerGfx = ImgShot;
@@ -33,9 +34,10 @@ package org.lemonparty.projectiles
 		
 		override public function update():void {
 			if (isTouching(UP)||isTouching(DOWN)||isTouching(LEFT)||isTouching(RIGHT)) {
+				var gmp:FlxPoint = getMidpoint();
+				K4G.logic.blood(gmp.x,gmp.y);
 				kill();
 			}
-			
 			super.update();
 			
 		}

@@ -6,7 +6,7 @@ package org.lemonparty
 	 */
 	public class IPipe extends Pipe 
 	{
-		
+		[Embed(source = "data/IPipe.png")] private var ImgPipe:Class;
 		public function IPipe(X:Number = 0, Y:Number = 0) 
 		{
 			super(X, Y);

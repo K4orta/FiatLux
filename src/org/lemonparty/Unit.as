@@ -5,6 +5,7 @@ package org.lemonparty
 	import org.flixel.FlxPath;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxG;
 	import flash.events.IEventDispatcher;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -29,6 +30,8 @@ package org.lemonparty
 		public var _coolDown:Number= 0;
 		public var _coolTime:Number = 1.5;
 		public var moveNormal:FlxPoint;
+		protected var _aiDelay:Number = 0;
+		protected var _aiDelayMax:Number = 1.5;
 		
 		public var carrying:GameObject;
 		public static const HEALTH_CHANGED:String = "healthChanged";
@@ -45,8 +48,32 @@ package org.lemonparty
 		
 		override public function update():void {
 			super.update();
+			if (_aiDelay > 0) {
+				_aiDelay -= FlxG.elapsed;
+			}
 		}
+		
+		override public function preUpdate():void {
+			var gt:uint = _logic.pipeMap.getTile(int((x+origin.x) / 96), int((y+origin.y) / 96));
+			if (_inField==false && (gt == 2 || gt == 3 || gt == 1)) {
+				_inField = true;
+				enterField();
+			}else if (_inField==true &&! (gt == 2 || gt == 3 || gt == 1)) {
+				_inField = false;
+				leaveField();
+			}
+			super.preUpdate();
+		}
+		
+		
 		// Hooks for AI
+		public function enterField():void {
+			
+		}
+		public function leaveField():void {
+			
+		}
+		
 		public function enterCombat():void {
 			
 		}
@@ -57,6 +84,13 @@ package org.lemonparty
 		
 		public function alertFriends():void {
 			
+		}
+		
+		public function bite(Tar:BasicObject):void {
+			if(_aiDelay<=0){
+				Tar.hurt(1);
+				_aiDelay = _aiDelayMax;
+			}
 		}
 		
 		public function moveToward(Target:FlxObject):void {
@@ -124,6 +158,12 @@ package org.lemonparty
 			return tc;
 		}
 		
+		override public function shotBy(Tar:Unit):void {
+			if (Tar && Tar.alive&&!attTar) {
+				attTar = Tar;
+			}
+		}
+		
 		public function combatSight(a:BasicObject):BasicObject {
 			//check against attTar;
 			var rayPnt:FlxPoint = new FlxPoint();
@@ -138,8 +178,8 @@ package org.lemonparty
 			var rp2:FlxPoint = new FlxPoint();
 			for each(var a:BasicObject in Group.members) {
 				if (a && a.alive) {
-					if ((facing == LEFT && a.x > x) || (facing == RIGHT && a.x < x))
-						continue;
+					//if ((facing == LEFT && a.x > x) || (facing == RIGHT && a.x < x))
+						//continue;
 					if (abs(a.getDist(this)) < sightRange) {
 						if(_map.ray(new FlxPoint(x+origin.x, y),new FlxPoint(a.x+a.origin.x, a.y+a.origin.y),rayPnt)){
 							return a;

@@ -17,11 +17,11 @@ package org.lemonparty
 		public var map:FlxTilemap;
 		public var projected:Boolean = false;
 		public var next:Pipe;
-		public var spawnTimer:Number = 1;
-		public var spawnMax:Number = 8;
+		public var spawnTimer:Number = 2;
+		public var spawnMax:Number = 7;
 		public var shortTimer:Number = 0;
-		public var waveCount:int = 3;
-		public var waveMax:int = 3;
+		public var waveCount:int = 4;
+		public var waveMax:int = 4;
 		
 		public function LightStart(X:Number = 0, Y:Number = 0){
 			super(X, Y);

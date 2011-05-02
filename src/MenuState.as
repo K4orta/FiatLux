@@ -9,9 +9,9 @@ package
 		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
-		[Embed(source = "mapData/Level1_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
-		[Embed(source = "mapData/Level1_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
-		[Embed(source = "mapData/Level1_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
+		[Embed(source = "mapData/Level0_tiles.txt", mimeType = "application/octet-stream") ] private var LvlOneData:Class;
+		[Embed(source = "mapData/Level0_pipes.txt", mimeType = "application/octet-stream") ] private var LvlOnePipes:Class;
+		[Embed(source = "mapData/Level0_Sprites.txt", mimeType = "application/octet-stream") ] private var LvlOneSprites:Class;
 		override public function create():void
 		{
 			FlxG.bgColor = 0xff000000;

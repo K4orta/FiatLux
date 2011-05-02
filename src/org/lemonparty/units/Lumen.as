@@ -18,6 +18,8 @@ package org.lemonparty.units
 		public var dest:FlxPoint = new FlxPoint();
 		public var lastPipe:Pipe;
 		[Embed(source = "../data/lumen.png")] private var ImgLumen:Class;
+		[Embed(source = "../data/laser1.mp3")] private var SndLaser:Class;
+		[Embed(source = "../data/LumenDies.mp3")] private var SndDie:Class;
 		public function Lumen(X:Number = 0, Y:Number = 0, SimpleGraphic:Class = null) {
 			super(X, Y, SimpleGraphic);
 			loadGraphic(ImgLumen, false, true, 23, 23);
@@ -25,7 +27,7 @@ package org.lemonparty.units
 			hostileGroup = _logic.enemies;
 			homeGroup = _logic.player;
 			_coolTime = .6;
-			_maxRunSpeed = 100;
+			_maxRunSpeed = 90;
 			health = 2;
 			dest.x = _logic.firstPipe.pipeLoc.x*96+int(Math.random()*64)+16;
 			dest.y = _logic.firstPipe.pipeLoc.y*96+int(Math.random()*64)+16;
@@ -39,7 +41,8 @@ package org.lemonparty.units
 					var slope:FlxPoint = new FlxPoint(emp.x - x - origin.x, emp.y - y - origin.y);
 					var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
 					var norm:FlxPoint = new FlxPoint(slope.x/len, slope.y/len); 
-					_logic.bullets.add(new luxShot(getMidpoint(), norm));
+					_logic.bullets.add(new luxShot(getMidpoint(), norm, 1, this));
+					FlxG.play(SndLaser, .5);
 					_coolDown = _coolTime;
 				}else {
 					_coolDown -= FlxG.elapsed;
@@ -67,16 +70,30 @@ package org.lemonparty.units
 			}
 			
 			if(dest==null){
-				if (isTouching(RIGHT)) {
-					moveNormal.make(-moveNormal.x,moveNormal.y);
+				if (isTouching(RIGHT)||isTouching(UP)||isTouching(DOWN)||isTouching(LEFT)) {
+					//moveNormal.make(-moveNormal.x,moveNormal.y);
+					kill();
 				}
-				if (isTouching(UP)) {
-					moveNormal.make(moveNormal.x,-moveNormal.y);
-				}
-				if (isTouching(DOWN)) {
-					moveNormal.make(moveNormal.x,-moveNormal.y);
+				
+				if (x > _map.width) {
+					kill();
 				}
 			}
+		}
+		
+		override public function enterField():void {
+			_maxRunSpeed = 190;
+		}
+		
+		override public function leaveField():void {
+			_maxRunSpeed = 90;
+		}
+		
+		override public function kill():void {
+			_logic.spark(x+origin.x,y+origin.y);
+			FlxG.play(SndDie);
+			super.kill();
+			
 		}
 	}
 

@@ -19,6 +19,9 @@ package org.lemonparty.aiTrees.leafs
 		
 		override public function run():uint {
 			var tar:BasicObject = parent.lineOfSight(parent.hostileGroup);
+			if (parent.attTar) {
+				return FAILURE;
+			}
 			if (tar&&tar.alive){
 				parent.attTar = tar;
 				return FAILURE;

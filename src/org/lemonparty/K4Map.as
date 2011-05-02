@@ -67,6 +67,7 @@ package org.lemonparty {
 			LightStart;
 			Pipe;
 			LPipe;
+			IPipe;
 			ExitPipe;
 			TheOmen;
 			TPipe;

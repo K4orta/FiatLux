@@ -3,6 +3,7 @@ package org.lemonparty
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	import org.flixel.FlxPoint;
+	import org.flixel.FlxG;
 	/**
 	 * ...
 	 * @author K4Orta (Erik Wong)
@@ -21,7 +22,7 @@ package org.lemonparty
 		public var beams:Vector.<FlxPoint>; // Works like a linked list;
 		public var emit:Boolean = false;
 		public var pipeLoc:FlxPoint;
-		
+		[Embed(source = "data/pipeRotate.mp3")] private var SndPipe:Class;
 		public function Pipe(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
 			// top, right, bottom, left
@@ -53,17 +54,18 @@ package org.lemonparty
 		}
 		
 		public function rotate():void {
-			//var tDir:Boolean = false;
-			//var t2:Boolean = false;
 			var newDict:Dictionary = new Dictionary();
-			//tDir = pipeDirs[directions[LEFT]];
 			newDict[directions[0]] = pipeDirs[directions[directions.length-1]];
 			
 			for (var i:uint = 0; i < directions.length-1;++i) {
 				newDict[directions[i+1]] = pipeDirs[directions[i]]
 			}
 			pipeDirs = newDict;
-
+			FlxG.play(SndPipe);
+			redrawLight();
+		}
+		
+		public function redrawLight():void {
 			breakConnections();
 			continueLight();
 		}
@@ -78,7 +80,6 @@ package org.lemonparty
 						reroute(new FlxPoint( -directions[i].x, -directions[i].y));
 						pipeMap.setTile(pipeLoc.x, pipeLoc.y, 1, false );
 					}
-					//trace("twice "+i)
 				}
 			}
 		}
@@ -89,13 +90,14 @@ package org.lemonparty
 			var len:uint = 0;
 			var gooed:Boolean;
 			while (gt==4||gt==6) {
-				if (K4G.logic.pipeLookup[brush.y][brush.x]&&K4G.logic.pipeLookup[brush.y][brush.x].next.length<1) {
-					next.push(K4G.logic.pipeLookup[brush.y][brush.x]);
+				if (_logic.pipeLookup[brush.y][brush.x]&&_logic.pipeLookup[brush.y][brush.x].next.length<1) {
+					next.push(_logic.pipeLookup[brush.y][brush.x]);
 					next[next.length - 1].continueLight();
 					break;
 				}
 				if(gt==4 &&!gooed){
-					pipeMap.setTile(brush.x, brush.y, (Math.abs(Dir.x) > Math.abs(Dir.y))?3:2)
+					pipeMap.setTile(brush.x, brush.y, (abs(Dir.x) > abs(Dir.y))?3:2)
+					
 					++len;
 				}else {
 					gooed = true;
@@ -108,6 +110,8 @@ package org.lemonparty
 			}
 			if(len>0)
 				beams.push(Dir);
+			if (gooed)
+				_logic.redrawOnGoo.push(this);
 		}
 		
 		public function breakConnections():void {

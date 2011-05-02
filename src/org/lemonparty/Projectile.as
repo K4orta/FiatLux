@@ -26,15 +26,16 @@ package org.lemonparty
 		protected var _tracer:FlxSprite;
 		public var hitType:uint=0;
 		public var tracerGfx:Class;
-		public var damage:Number=1;
+		public var damage:Number = 1;
+		public var shooter:Unit;
 		
-		public function Projectile(Ori:FlxPoint, Normal:FlxPoint, SSpeed:Number=2000) {
+		public function Projectile(Ori:FlxPoint, Normal:FlxPoint, SSpeed:Number=2000, Shooter:Unit=null) {
 			super();
 			ori=Ori;
 			speed = SSpeed;
 			normal = Normal;
 			slope.make(Normal.x * speed * FlxG.elapsed, Normal.y * speed * FlxG.elapsed);
-			
+			shooter = Shooter;
 			tail.make(ori.x, ori.y);
 			head.make(ori.x+slope.x, ori.y+slope.y);
 			

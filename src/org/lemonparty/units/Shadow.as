@@ -1,6 +1,7 @@
 package org.lemonparty.units 
 {
 	import org.lemonparty.aiTrees.branches.*;
+	import org.lemonparty.BasicObject;
 	import org.lemonparty.btree.*;
 	import org.lemonparty.projectiles.gooShot;
 	import org.lemonparty.Unit;
@@ -12,21 +13,24 @@ package org.lemonparty.units
 	 */
 	public class Shadow extends Unit {
 		[Embed(source = "../data/spectre.png")] private var ImgShadow:Class;
-		protected var _aiDelay:Number = 0;
-		protected var _aiDelayMax:Number = 1;
+		[Embed(source = "../data/enemydies.mp3")] private var SndDie:Class;
+		[Embed(source = "../data/enemyHurt.mp3")] private var SndHurt:Class;
+		[Embed(source = "../data/enemyShoot.mp3")] private var SndShoot:Class;
 		
 		public function Shadow(X:Number = 0, Y:Number = 0) {
 			super(X, Y);
-			health = 8;
+			health = 10;
 			loadGraphic(ImgShadow, false, true, 32, 32);
 			acceleration.y =0;
 			facing = LEFT;
 			hostileGroup = _logic.player;
 			homeGroup = _logic.enemies;
-			_coolTime = 1;
+			_coolTime = .8;
 			cortex = new Selector(this as Unit);
 			cortex.addChild(new BT_Combat(this as Unit));
 			cortex.addChild(new BT_Idle(this as Unit));
+			_maxRunSpeed = 90;
+			sightRange = 300;
 		}
 		
 		override public function update():void {
@@ -39,13 +43,25 @@ package org.lemonparty.units
 					var len:Number = sqrt(slope.x * slope.x + slope.y *slope.y);
 					var norm:FlxPoint = new FlxPoint(slope.x/len, slope.y/len); 
 					_logic.enemyBullets.add(new gooShot(getMidpoint(), norm));
-					
+					FlxG.play(SndShoot);
 					_coolDown = _coolTime;
 				}else {
 					_coolDown -= FlxG.elapsed;
 				}
 			}
 		}
+		
+		override public function hurt(Arg:Number):void {
+			super.hurt(Arg);
+			FlxG.play(SndHurt);
+		}
+		
+		override public function kill():void {
+			super.kill();
+			FlxG.play(SndDie);
+		}
+		
+		
 		
 	}
 

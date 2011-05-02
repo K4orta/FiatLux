@@ -12,6 +12,7 @@
     <sprite name="TheOmen" idx="7" className="units.TheOmen" image="../src/org/lemonparty/data/theFilth.png" width="96" height="96" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="96" boundsHeight="96" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="SpectreTower" idx="8" className="units.SpecTower" image="../src/org/lemonparty/data/specTower.png" width="83" height="91" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="83" boundsHeight="91" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Exit Pipe" idx="9" className="ExitPipe" image="../src/org/lemonparty/data/exitPipe.png" width="96" height="96" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="96" boundsHeight="96" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="I Pipe" idx="10" className="IPipe" image="../src/org/lemonparty/data/IPipe.png" width="96" height="96" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="96" boundsHeight="96" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -96,11 +97,11 @@
     <group name="lightPipes" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
       <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
         <sprite guid="08D16C25-9C76-815F-A907-4210987AE50F" idx="4" x="32" y="320" angle="0" scaleX="1" scaleY="1" flipped="false"/>
-        <sprite guid="EFF71FA7-F570-2781-AC3D-6A71F05D9531" idx="5" x="480" y="288" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="CBA9A39D-9B48-2C61-9724-A6998C32E162" idx="5" x="480" y="576" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="941A10F1-F2F0-9593-C796-852F006CB82F" idx="5" x="864" y="576" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="936F2C18-F72A-CDE8-83EB-CD1A4BD4C465" idx="6" x="864" y="288" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="249CC1C2-ECD0-8367-6A99-C833E369BFBF" idx="9" x="1440" y="288" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="BD6AA67C-F598-94DF-3C88-83835D883460" idx="10" x="480" y="288" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
   </layers>
