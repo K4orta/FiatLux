@@ -11,3 +11,8 @@ lightPipes LPipe 768.000 576.000
 lightPipes ExitPipe 2304.000 384.000
 lightPipes LPipe 1344.000 576.000
 lightPipes LPipe 1344.000 384.000
+text FlxText 194.000 168.000 Fiat_Lux
+text FlxText 197.000 501.000 It's_dangerous_to_go_alone 
+text FlxText 699.000 347.000 Shoot_the_pipe_to_take_the_light_with_you
+text FlxText 98.000 306.000 WASD_to_move._Spacebar_to_jump._Mouse_to_look/shoot
+text FlxText 1666.000 386.000 You'll_need_friends_to_beat_this_guy

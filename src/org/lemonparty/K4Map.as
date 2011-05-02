@@ -4,6 +4,7 @@ package org.lemonparty {
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import flash.utils.getDefinitionByName;
+	import org.flixel.FlxText;
 	import org.lemonparty.units.*;
 	/**
 	 * ...
@@ -95,9 +96,14 @@ package org.lemonparty {
 					if (entry[1] == "units.Hero"){
 						continue;
 					}
-					df= getDefinitionByName("org.lemonparty."+entry[1]) as Class;
-					findGroup(entry[0]).add(new df(Number(entry[2]), Number(entry[3])));
-					
+					if (entry[1] == "FlxText") {
+						var txt:Array = entry[4].split("_");
+						
+						findGroup(entry[0]).add(new FlxText(Number(entry[2]), Number(entry[3]), 200, txt.join(" ")));
+					}else{
+						df= getDefinitionByName("org.lemonparty."+entry[1]) as Class;
+						findGroup(entry[0]).add(new df(Number(entry[2]), Number(entry[3])));
+					}
 				}
 			}
 		}
@@ -112,6 +118,8 @@ package org.lemonparty {
 					return logic.miscObjects;
 				case "lightPipes":
 					return logic.lightPipes;
+				case "text":
+					return logic.text;
 				//case "searchables":
 					//return logic.searchables;
 				default:

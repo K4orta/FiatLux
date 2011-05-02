@@ -13,6 +13,9 @@
     <sprite name="SpectreTower" idx="8" className="units.SpecTower" image="../src/org/lemonparty/data/specTower.png" width="83" height="91" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="83" boundsHeight="91" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="Exit Pipe" idx="9" className="ExitPipe" image="../src/org/lemonparty/data/exitPipe.png" width="96" height="96" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="96" boundsHeight="96" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
     <sprite name="I Pipe" idx="10" className="IPipe" image="../src/org/lemonparty/data/IPipe.png" width="96" height="96" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="96" boundsHeight="96" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Text1" idx="11" className="FlxText1" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Text1_2" idx="12" className="FlxText2" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Text1_2_2_" idx="13" className="FlxText3" image="../src/org/lemonparty/data/gooShot.png" width="64" height="16" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group3" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -93,6 +96,7 @@
         <sprite guid="BD1CE0CF-534C-1EC3-A89A-70F649B46F01" idx="7" x="1248" y="480" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="A647FB9F-F329-74C3-0668-CED87A1F6CF7" idx="8" x="1920" y="384" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="50A05DDA-ADF7-2FC9-9657-351D3FE14A8E" idx="2" x="1248" y="384" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="4A239592-C161-E718-3489-A5358C2E82A8" idx="7" x="2016" y="384" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
     <group name="lightPipes" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -103,6 +107,17 @@
         <sprite guid="249CC1C2-ECD0-8367-6A99-C833E369BFBF" idx="9" x="2304" y="384" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="878D82CD-0F94-609C-4A41-94E08A424C81" idx="5" x="1344" y="576" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="9F3C0536-B6F0-BBD8-3E32-29A550BF4C9D" idx="5" x="1344" y="384" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+      </spritelayer>
+    </group>
+    <group name="text" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
+        <sprite guid="46554687-87D5-82EF-E839-8D90C404ACDB" idx="11" x="194" y="168" angle="0" scaleX="1" scaleY="1" flipped="false">
+          <properties>
+            <type typeof="String" name="Item0" value="Heyo"/>
+          </properties>
+        </sprite>
+        <sprite guid="BD1C5363-83E9-1826-0A50-DEFC63B4A70E" idx="12" x="197" y="501" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="DCB6CF2D-039E-5033-87D6-B0F368FD05FB" idx="13" x="699" y="347" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
     </group>
   </layers>
@@ -222,7 +237,7 @@
     <setting name="AS3Dir">C:\Users\Erik\Desktop\K4Ludum\src\mapData</setting>
   </exporter>
   <guides>
-    <snap>true</snap>
+    <snap>false</snap>
     <visible>true</visible>
     <x>0</x>
     <y>0</y>

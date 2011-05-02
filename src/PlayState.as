@@ -21,6 +21,7 @@ package{
 		public var miscObjects:FlxGroup = new FlxGroup();
 		public var collideMap:FlxGroup = new FlxGroup();
 		public var bulletsHit:FlxGroup = new FlxGroup();
+		public var text:FlxGroup = new FlxGroup();
 		public var items:FlxGroup = new FlxGroup();
 		public var gui:K4GUI;
 		public var mapLoader:K4Map;
@@ -75,6 +76,7 @@ package{
 			add(player);
 			add(marks);
 			add(bullets);
+			add(text);
 			add(enemyBullets);
 			add(particles)
 			
